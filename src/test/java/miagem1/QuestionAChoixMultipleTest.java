@@ -19,7 +19,7 @@ public class QuestionAChoixMultipleTest {
         ArrayList<Integer> indices = new ArrayList<Integer>();
         indices.add(1);
         indices.add(3);
-        question = new QuestionAChoixMultiple("Un énoncé", indices);
+        question = new QuestionAChoixMultiple("Un énoncé", indices, 5);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class QuestionAChoixMultipleTest {
         //et que on demande le score de l'indice à la question
         float score = question.getScoreForIndice(indiceEtudiant);
 
-        //Then Le score obtenu est 0
-        assertEquals(0f, score, 0.01f);
+        //Then Le score obtenu est -33,33
+        assertEquals(-33.33f, score, 0.01f);
     }
 }

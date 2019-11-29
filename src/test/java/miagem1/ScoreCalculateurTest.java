@@ -15,7 +15,7 @@ public class ScoreCalculateurTest {
     @Before
     public void setUp() throws Exception {
         //Given : Une instance QuestionAChoixMultiple et de ScoreCalculateur
-        questionAChoixMultiple = new QuestionAChoixMultiple("q1",new ArrayList<Integer>(Arrays.asList(2,3,5)));
+        questionAChoixMultiple = new QuestionAChoixMultiple("q1",new ArrayList<Integer>(Arrays.asList(2,3,5)), 5);
         scorecalc = new ScoreCalculateur();
     }
 
@@ -51,5 +51,27 @@ public class ScoreCalculateurTest {
 
         //Then Le score obtenu est 100.
         assertEquals(100 , score, 0.01f);
+    }
+
+    @Test
+    public void calculeScore0PointNegatif() {
+        // When Quand un élève donne une liste avec toutes les réponses
+        ArrayList reponses = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+        // et que on demande le score totale
+        float score = scorecalc.calculeScore(reponses, questionAChoixMultiple);
+
+        //Then Le score obtenu est 0.
+        assertEquals(0 , score, 0.01f);
+    }
+
+    @Test
+    public void calculeScore16Points() {
+        // When Quand un élève donne une liste avec 2 bonnes réponses et une mauvaise
+        ArrayList reponses = new ArrayList<Integer>(Arrays.asList(1,2,3));
+        // et que on demande le score totale
+        float score = scorecalc.calculeScore(reponses, questionAChoixMultiple);
+
+        //Then Le score obtenu est 16.66.
+        assertEquals(16.66 , score, 0.01f);
     }
 }
